@@ -14,6 +14,7 @@
 </template>
 
 
+<!-- App.vue -->
 <script>
 import { defineAsyncComponent } from 'vue';
 
