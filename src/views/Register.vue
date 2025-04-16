@@ -79,6 +79,8 @@
   </template>
   
   <script>
+  import axios from 'axios'
+
   export default {
     name: 'Register',
     data() {
@@ -87,28 +89,44 @@
         email: '',
         password: '',
         confirmPassword: '',
-        showPassword: false
+        showPassword: false,
+        isLoading: false,
+        error: null
       }
     },
     methods: {
       togglePassword() {
         this.showPassword = !this.showPassword
       },
-      handleRegister() {
+      async handleRegister() {
         if (this.password !== this.confirmPassword) {
-          alert("Les mots de passe ne correspondent pas.")
+          this.error = "Les mots de passe ne correspondent pas."
           return
         }
   
-        // Exemple d'envoi (remplace-le par un appel réel à ton back-end)
-        console.log("Inscription:", {
-          fullName: this.fullName,
-          email: this.email,
-          password: this.password
-        })
+        this.isLoading = true
+        this.error = null
   
-        alert("Compte créé avec succès ! (simulation)")
-        this.$router.push('/login')
+        try {
+          // Remplacez l'URL par celle de votre backend
+          const response = await axios.post('http://localhost:3000/api/auth/register', {
+            fullName: this.fullName,
+            email: this.email,
+            password: this.password
+          })
+  
+          // Si l'inscription réussit, stockez le token si nécessaire
+          if (response.data.token) {
+            localStorage.setItem('token', response.data.token)
+          }
+  
+          // Redirection vers la page de connexion
+          this.$router.push('/login')
+        } catch (err) {
+          this.error = err.response?.data?.message || "Une erreur est survenue lors de l'inscription."
+        } finally {
+          this.isLoading = false
+        }
       }
     }
   }
@@ -134,4 +152,3 @@
     box-shadow: 0 20px 40px rgba(0, 128, 0, 0.2);
   }
   </style>
-  

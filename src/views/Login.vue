@@ -56,23 +56,46 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Login',
   data() {
     return {
       email: '',
       password: '',
-      showPassword: false
+      showPassword: false,
+      isLoading: false,
+      error: null
     }
   },
   methods: {
-    handleLogin() {
-      // Ici, tu peux appeler une API réelle pour la connexion
-      console.log('Connexion avec :', this.email, this.password)
-      alert('Connexion réussie (simulation).')
-    },
     togglePassword() {
       this.showPassword = !this.showPassword
+    },
+    async handleLogin() {
+      this.isLoading = true
+      this.error = null
+
+      try {
+        // Remplacez l'URL par celle de votre backend
+        const response = await axios.post('http://localhost:3000/api/auth/login', {
+          email: this.email,
+          password: this.password
+        })
+
+        // Stockage du token dans le localStorage
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token)
+        }
+
+        // Redirection vers le tableau de bord
+        this.$router.push('/dashboard')
+      } catch (err) {
+        this.error = err.response?.data?.message || "Une erreur est survenue lors de la connexion."
+      } finally {
+        this.isLoading = false
+      }
     }
   }
 }
