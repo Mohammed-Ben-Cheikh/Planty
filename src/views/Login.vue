@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import AuthService from '@/services/auth.service'
 
 export default {
   name: 'Login',
@@ -78,17 +78,7 @@ export default {
       this.error = null
 
       try {
-        // Remplacez l'URL par celle de votre backend
-        const response = await axios.post('http://localhost:3000/api/auth/login', {
-          email: this.email,
-          password: this.password
-        })
-
-        // Stockage du token dans le localStorage
-        if (response.data.token) {
-          localStorage.setItem('token', response.data.token)
-        }
-
+        await AuthService.login(this.email, this.password)
         // Redirection vers le tableau de bord
         this.$router.push('/dashboard')
       } catch (err) {

@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import AuthService from '@/services/auth.service'
+
 export default {
     name: 'PasswordReset',
     data() {
@@ -60,15 +62,12 @@ export default {
             this.message = ''
 
             try {
-                // Ici, ajoutez votre logique pour envoyer la demande de réinitialisation
-                // Par exemple, un appel API :
-                // await axios.post('/api/reset-password', { email: this.email })
-
+                await AuthService.resetPassword(this.email)
                 this.isError = false
                 this.message = 'Un email de réinitialisation a été envoyé à votre adresse.'
             } catch (error) {
                 this.isError = true
-                this.message = 'Une erreur est survenue. Veuillez réessayer.'
+                this.message = error.response?.data?.message || 'Une erreur est survenue. Veuillez réessayer.'
             } finally {
                 this.isLoading = false
             }
