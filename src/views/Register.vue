@@ -82,7 +82,14 @@ export default {
       this.error = null
 
       try {
-        await AuthService.register(this.fullName, this.email, this.password)
+        await AuthService.register(this.fullName, this.email, this.password, this.confirmPassword)
+        // Affichage d'un message de succès ou d'une notification
+        this.$notify({
+          group: 'auth',
+          title: 'Inscription réussie',
+          text: 'Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.',
+          type: 'success'
+        })
         // Redirection vers la page de connexion
         this.$router.push('/login')
       } catch (err) {

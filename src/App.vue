@@ -10,6 +10,9 @@
 
     <!-- FOOTER -->
     <FooterComponent v-if="showFooter" />
+
+    <!-- NOTIFICATION -->
+    <NotificationComponent />
   </div>
 </template>
 
@@ -23,6 +26,7 @@ export default {
   components: {
     HeaderComponent: defineAsyncComponent(() => import('./components/HeaderComponent.vue')),
     FooterComponent: defineAsyncComponent(() => import('./components/FooterComponent.vue')),
+    NotificationComponent: defineAsyncComponent(() => import('./components/NotificationComponent.vue')),
   },
   data() {
     return {
