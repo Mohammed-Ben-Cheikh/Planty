@@ -15,7 +15,7 @@ class AuthService {
     const response = await axios.post(API_URL + 'register', {
       fullName,
       email,
-      password
+      password,
     })
     if (response.data.token) {
       localStorage.setItem('token', response.data.token)

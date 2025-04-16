@@ -4,8 +4,8 @@ import axios from 'axios'
 const http = axios.create({
   baseURL: 'http://localhost:3000/api',
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 })
 
 // Intercepteur pour les requêtes
@@ -19,7 +19,7 @@ http.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error)
-  }
+  },
 )
 
 // Intercepteur pour les réponses
@@ -32,7 +32,7 @@ http.interceptors.response.use(
       window.location.href = '/login'
     }
     return Promise.reject(error)
-  }
+  },
 )
 
 export default http
