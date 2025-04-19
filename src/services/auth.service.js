@@ -4,6 +4,7 @@ import notificationService from './notification/notification.service'
 const API_URL = '' // Base URL is already set in http.config.js
 
 class AuthService {
+  
   async login(email, password) {
     try {
       const response = await http.post(API_URL + 'login', { email, password })

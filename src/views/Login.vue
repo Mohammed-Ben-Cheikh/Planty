@@ -2,7 +2,8 @@
   <div class="min-h-screen flex items-center justify-center">
     <div
       class="bg-white rounded-2xl shadow-2xl p-10 w-full max-w-md transform transition-all duration-500 hover:rotate-[1deg] hover:shadow-3xl"
-      style="perspective: 1200px;">
+      style="perspective: 1200px"
+    >
       <div class="text-center mb-8">
         <img src="@/assets/plant-logo.png" alt="Logo" class="mx-auto w-28 h-28 rounded-3xl mb-3" />
         <h2 class="text-3xl font-extrabold text-green-700">Connexion sécurisée</h2>
@@ -13,35 +14,49 @@
         <div>
           <label class="block text-sm font-medium text-gray-700">Adresse e-mail</label>
           <div class="mt-1 relative">
-            <input type="email" v-model="email" required
+            <input
+              type="email"
+              v-model="email"
+              required
               class="pl-10 pr-4 py-2 w-full border rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-green-400"
-              placeholder="ex: hello@planty.com" />
-            <span class="absolute left-3 top-2.5 text-gray-400">
-              📧
-            </span>
+              placeholder="ex: hello@planty.com"
+            />
+            <span class="absolute left-3 top-2.5 text-gray-400"> 📧 </span>
           </div>
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700">Mot de passe</label>
           <div class="mt-1 relative">
-            <input :type="showPassword ? 'text' : 'password'" v-model="password" required
+            <input
+              :type="showPassword ? 'text' : 'password'"
+              v-model="password"
+              required
               class="pl-10 pr-10 py-2 w-full border rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-green-400"
-              placeholder="••••••••" />
+              placeholder="••••••••"
+            />
             <span class="absolute left-3 top-2.5 text-gray-400">🔒</span>
-            <span class="absolute right-3 top-2.5 text-sm cursor-pointer text-green-500" @click="togglePassword">
+            <span
+              class="absolute right-3 top-2.5 text-sm cursor-pointer text-green-500"
+              @click="togglePassword"
+            >
               {{ showPassword ? '🙈' : '👁️' }}
             </span>
           </div>
         </div>
 
-        <button type="submit"
-          class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-xl font-semibold shadow-md transition duration-300">
+        <button
+          type="submit"
+          class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-xl font-semibold shadow-md transition duration-300"
+        >
           Se connecter
         </button>
         <!-- Add this password reset section -->
         <div class="text-center mt-4">
-          <router-link to="/password-reset" class="text-sm text-green-600 hover:underline cursor-pointer">
+          <router-link
+            to="/password-reset"
+            class="text-sm text-green-600 hover:underline cursor-pointer"
+          >
             Mot de passe oublié ?
           </router-link>
         </div>
@@ -49,7 +64,9 @@
 
       <p class="text-center text-sm text-gray-500 mt-6">
         Vous n'avez pas encore de compte ?
-        <router-link to="/register" class="text-green-600 hover:underline font-medium">Inscrivez-vous</router-link>
+        <router-link to="/register" class="text-green-600 hover:underline font-medium"
+          >Inscrivez-vous</router-link
+        >
       </p>
     </div>
   </div>
@@ -66,13 +83,14 @@ export default {
       password: '',
       showPassword: false,
       isLoading: false,
-      error: null
+      error: null,
     }
   },
   methods: {
     togglePassword() {
       this.showPassword = !this.showPassword
     },
+
     async handleLogin() {
       this.isLoading = true
       this.error = null
@@ -82,12 +100,12 @@ export default {
         // Redirection vers le tableau de bord
         this.$router.push('/dashboard')
       } catch (err) {
-        this.error = err.response?.data?.message || "Une erreur est survenue lors de la connexion."
+        this.error = err.response?.data?.message || 'Une erreur est survenue lors de la connexion.'
       } finally {
         this.isLoading = false
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
