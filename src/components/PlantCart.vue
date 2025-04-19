@@ -30,13 +30,13 @@ export default {
   props: {
     plants: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     addToCart(plant) {
       this.$emit('add-to-cart', plant)
-    }
-  }
+    },
+  },
 }
 </script>
